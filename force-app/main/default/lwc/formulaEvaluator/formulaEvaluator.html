@@ -1,0 +1,93 @@
+<!--
+  @description       : Formula Evaluator LWC Component
+  @author            : Logesh M
+  @last modified on  : 09-28-2024
+  @last modified by  : Logesh M
+-->
+<template>
+  <div>
+    <c-formula-evaluator-header></c-formula-evaluator-header>
+  </div>
+    <lightning-card>
+      <div>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Formulizing!"></lightning-spinner>
+        </template>
+        <div class="slds-grid slds-no-flex">
+            <div class="slds-col slds-size_6-of-12">
+                <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+                  <lightning-combobox 
+              name="objectList"
+              label="Object"
+              placeholder="Select an Object"
+              options={objectOptions}
+              value={selectedObject}
+              onchange={handleInputChange}
+              ></lightning-combobox> 
+                </div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+                    <lightning-combobox
+                    name="FormulaReturnType"
+                    label="Formula Return Type"
+                    placeholder="Select a Return Type"
+                    options={returnTypeOptions}
+                    data-id="returnType"
+                    onchange={handleInputChange}
+                    >
+                </lightning-combobox>                
+            </div>
+            </div>
+        </div>
+    <div class="slds-col slds-size_12-of-12">
+        <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+            <lightning-textarea name="EnteredFormula" label="Enter Your Formula" max-length="3900" placeholder="Start typing your formula here..." onchange={handleInputChange}></lightning-textarea>
+            <lightning-button-icon style="display:flex; align-items:right; justify-content:right;"
+            label="Copy to Clipboard" 
+            onclick={copyToClipboard}
+            icon-name={iconName}
+            tooltip={copyFormulaMessage}
+            variant="inverse">
+        </lightning-button-icon>
+            <div class="slds-list_horizontal">
+            <lightning-input class="slds-p-around_x-small" type="checkbox" label="Handle Blank Field Values in Formula" onchange={handleInputChange} ></lightning-input>
+          <lightning-helptext content="If checked: Treat blank fields as zero. If unchecked: Treat blank fields as blank."></lightning-helptext>
+        </div>  
+        </div>
+        <div class="slds-m-around_x-small slds-align_absolute-center">
+            <lightning-button 
+              variant="brand"
+              label="Formulize" 
+              onclick={formulizeHandler}
+              disabled={isFormulizerButtonDisabled}
+              icon-name="utility:setup_assistant_guide"
+              icon-position="left"
+            ></lightning-button>
+
+        </div>
+    </div>
+      </div>
+      <div style="height: 300px;">
+
+        <template lwc:if={formulizerResults}>
+          
+          <lightning-datatable
+          key-field="id"
+          show-row-number-column
+          hide-checkbox-column
+          data={formulizerResults}
+          columns={columns}>
+          </lightning-datatable>
+      </template>
+
+      <template lwc:else>
+          <div class="slds-p-top_x-large">
+        <c-formula-evaluator-empty-state></c-formula-evaluator-empty-state>
+      </div>
+
+    </template>
+    </div>
+
+    </lightning-card>
+</template>

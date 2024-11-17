@@ -1,0 +1,37 @@
+<!--
+  @description       : Formula Evaluator Header LWC Component
+  @author            : Logesh M
+  @last modified on  : 09-28-2024
+  @last modified by  : Logesh M
+-->
+<template>
+    <div>
+        <header class="slds-builder-header">
+        <div class="slds-builder-header__item">
+        <div class="slds-builder-header__item-label slds-media slds-media_center">
+        <div class="slds-media__figure">
+        <lightning-icon icon-name='utility:formula' alternative-text='formulizer' variant='inverse' size='medium' title='Formulizer'></lightning-icon>     </div>
+        <div class="slds-media__body slds-text-heading_medium"><strong>Formulizer</strong></div>
+        </div>
+        </div>
+        <div class="slds-builder-header__item slds-has-flexi-truncate">
+            <div class="slds-builder-header__item-label">
+            <span class="slds-truncate slds-text-heading_small" title="Formula Lab">Formula Lab</span>
+            </div>
+            </div>
+        <div class="slds-builder-header__item slds-builder-header__utilities">
+        <div class="slds-builder-header__utilities-item">
+        <a class="slds-builder-header__item-action slds-media slds-media_center" onclick={aboutSectionHandler}>
+        <div class="slds-media__figure">
+        <lightning-icon icon-name='utility:light_bulb' alternative-text='about_formulizer' variant='inverse' size='small' title='about_formulizer'></lightning-icon>
+        </div>
+        <div class="slds-media__body">About Formulizer</div>
+        </a>
+        </div>
+        </div>
+        </header>
+        </div>
+        <template lwc:if={openModal}>
+            <c-formula-evaluator-about-section onclose={modalCloseHandler}></c-formula-evaluator-about-section>
+        </template>
+</template>

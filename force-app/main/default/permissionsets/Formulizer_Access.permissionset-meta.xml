@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>DynamicFormulaEvaluator</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DynamicFormulaEvaluatorTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <description>Provides Access to Formulizer Application.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Formulizer Access</label>
+    <license>Salesforce</license>
+    <tabSettings>
+        <tab>Formulizer</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+</PermissionSet>
